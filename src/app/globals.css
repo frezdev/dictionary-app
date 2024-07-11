@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: monospace,serif;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
