@@ -7,7 +7,8 @@ export class WordServices {
     try {
       const res = await fetch(`${API_URL}/${query}`)
 
-      if (res.status !== 200) throw new Error(res.statusText);
+      if (res.status === 404) throw new Error(`${res.status} - Not Found`);
+      if (res.status !== 200) throw new Error(res.statusText, { cause: res.status });
 
       const data = await res.json() as APIResponse[]
       return [null, data]

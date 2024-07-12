@@ -15,14 +15,17 @@ export const SearchForm = () => {
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     onSubmit: async (formValue) => {
-      const [error, data] = await WordServices.getByQuery(formValue.search.trim())
-      if (error) {
-        toast.error(error.message, {
-          style: { fontSize: 16, color: 'red' }
-        })
-        return
+      try {
+        const [error, data] = await WordServices.getByQuery(formValue.search.trim())
+        if (data) dispatch(setWord(data))
+        if (error) throw new Error(error.message)
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(error.message, {
+            style: { fontSize: 16, color: 'red' }
+          })
+        }
       }
-      dispatch(setWord(data))
 
       historial.save({
         word: formValue.search,
