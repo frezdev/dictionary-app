@@ -18,10 +18,9 @@ export const HistoryButton = () => {
 
   useEffect(() => {
     const historialItems = historial.get();
-
     if (!historialItems) return;
     setItems(historialItems)
-  }, [])
+  }, [isOpen])
 
   return (
     <div>
