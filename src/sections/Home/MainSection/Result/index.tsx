@@ -3,24 +3,25 @@ import { Player } from "@/components/Home/Result/Player"
 import { HorizontalSeparator } from "@/components/Shared/HorizontalSeparator"
 import { SourceUrls } from "@/components/Home/Result/SourceUrls"
 import { ResultTitle } from "@/components/Home/Result/ResultTitle"
-import { word } from "@/mock"
+import type { APIResponse } from "@/types"
 
-export const Result = () => {
-  const [mock] = word
-
-  const audio = mock.phonetics.find(p => p.audio)?.audio
+interface Props {
+  word: APIResponse
+}
+export const Result = ({ word }: Props) => {
+  const audio = word.phonetics.find(p => p.audio)?.audio
 
   return (
     <article className="mt-10">
       <section className="flex items-center justify-between">
-        <ResultTitle word={mock.word} phonetic={mock.phonetic} />
+        <ResultTitle word={word.word} phonetic={word.phonetic} />
         {audio && <Player audio={audio} />}
       </section>
-      {mock.meanings.map(meaning => (
-        <PartOfSpeech key={meaning.partOfSpeech} meaning={meaning} />
+      {word.meanings.map((meaning, index) => (
+        <PartOfSpeech key={`${meaning.partOfSpeech}_${index}`} meaning={meaning} />
       ))}
       <HorizontalSeparator />
-      <SourceUrls sourceUrls={mock.sourceUrls} />
+      <SourceUrls sourceUrls={word.sourceUrls} />
     </article>
   )
 }
