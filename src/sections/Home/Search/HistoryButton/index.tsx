@@ -25,7 +25,7 @@ export const HistoryButton = () => {
 
   return (
     <div>
-      <button onClick={handleOpen} className="btn btn-primary text-zinc-500 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-900">
+      <button title="open-historial" onClick={handleOpen} className="btn btn-primary text-zinc-500 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-900">
         <HistoryIcon width={30} height={30} />
       </button>
       {isOpen && <Modal items={items} />}

@@ -6,7 +6,8 @@ import { WordServices } from "@/services/words"
 import { useAppDispatch } from "@/redux/hooks"
 import { setWord } from "@/redux/features/word/wordSlice"
 import { historial } from "@/services/historial"
-import { Toaster, toast } from "sonner"
+import { toast } from "sonner"
+import { randomUUID } from 'crypto'
 
 export const SearchForm = () => {
   const dispatch = useAppDispatch()
@@ -16,7 +17,7 @@ export const SearchForm = () => {
     onSubmit: async (formValue) => {
       const [error, data] = await WordServices.getByQuery(formValue.search.trim())
       if (error) {
-        toast.error("This word is not found", {
+        toast.error(error.message, {
           style: { fontSize: 16, color: 'red' }
         })
         return
@@ -26,7 +27,7 @@ export const SearchForm = () => {
       historial.save({
         word: formValue.search,
         date: new Date(),
-        id: crypto.randomUUID()
+        id: randomUUID()
       })
 
     }
@@ -66,7 +67,7 @@ export const SearchForm = () => {
           ${errors.search && "placeholder:text-red-500"}
         `}
       />
-      <button type="submit" className="text-purple-500 p-1">
+      <button title="submit-button" type="submit" className="text-purple-500 p-1">
         <SearchIcon width={20} height={20} />
       </button>
     </form>

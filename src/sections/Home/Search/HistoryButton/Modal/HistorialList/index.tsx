@@ -21,14 +21,9 @@ export const HistorialList = ({ items }: Props) => {
     dispatch(toggleModal())
   }
 
-  console.log({ items });
-
-  const sortedItems = items.sort((a, b) => {
+  items.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime()
   })
-
-  console.log({ sortedItems });
-
 
   return (
     <ul className="max-h-[85%] overflow-y-scroll">
@@ -37,7 +32,7 @@ export const HistorialList = ({ items }: Props) => {
           key={item.word}
           className="px-5 py-4 border-b border-zinc-200 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-700 dark:border-zinc-700"
         >
-          <article onClick={handleClick(item.word)} className="flex items-center justify-between dark:text-zinc-300 text-lg font-semibold">
+          <article title='historial-item' onClick={handleClick(item.word)} className="flex items-center justify-between dark:text-zinc-300 text-lg font-semibold">
             <div className="flex items-center gap-2">
               <HistoryIcon width={20} height={20} />
               {item.word}
