@@ -32,3 +32,9 @@ export interface Phonetic {
   sourceUrl: string;
   license: License;
 }
+
+export interface HistorialItem {
+  id: string;
+  word: string;
+  date: Date;
+}
