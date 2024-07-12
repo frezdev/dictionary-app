@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MoonIcon, MoonFillIcon } from '@/components/Shared/Icons'
 
 export const SwitchToggle = () => {
@@ -7,7 +7,17 @@ export const SwitchToggle = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked)
+    document.querySelector('html')?.classList.toggle('dark')
   }
+
+  useEffect(() => {
+    const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+    if (prefersDarkTheme) {
+      setChecked(true)
+      document.querySelector('html')?.classList.add('dark')
+    }
+  }, [])
 
   return (
     <label className="inline-flex items-center cursor-pointer">
