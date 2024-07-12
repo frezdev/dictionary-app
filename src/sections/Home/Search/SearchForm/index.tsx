@@ -45,33 +45,30 @@ export const SearchForm = () => {
   }
 
   return (
-    <>
-      <Toaster />
-      <form
-        onSubmit={handleSubmit}
-        className={`
+    <form
+      onSubmit={handleSubmit}
+      className={`
         bg-gray-100 dark:bg-zinc-800 rounded-xl px-4 py-3 flex w-full
         ${errors.search && "outline outline-2 outline-red-500"}
       `}
-      >
-        <input
-          value={values.search}
-          onChange={handleChange}
-          name="search"
-          type="text"
-          placeholder={errors.search ? errors.search : "Search..."}
-          className={`
+    >
+      <input
+        value={values.search}
+        onChange={handleChange}
+        name="search"
+        type="text"
+        placeholder={errors.search ? errors.search : "Search..."}
+        className={`
           bg-transparent
           dark:text-gray-200
           outline-none
           w-full text-xl
           ${errors.search && "placeholder:text-red-500"}
         `}
-        />
-        <button type="submit" className="text-purple-500 p-1">
-          <SearchIcon width={20} height={20} />
-        </button>
-      </form>
-    </>
+      />
+      <button type="submit" className="text-purple-500 p-1">
+        <SearchIcon width={20} height={20} />
+      </button>
+    </form>
   )
 }
