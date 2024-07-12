@@ -1,6 +1,6 @@
 interface Props {
   word: string;
-  phonetic: string;
+  phonetic?: string;
 }
 export const ResultTitle = ({ word, phonetic }: Props) => {
   return (
