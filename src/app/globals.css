@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-family: sans-serif;
+}
+
 html {
-  font-family: monospace,serif;
+  font-family: var(--font-family);
+  font-size: 1rem
 }
 
 @layer utilities {
