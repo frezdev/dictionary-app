@@ -11,7 +11,15 @@ export const PartOfSpeech = ({ meaning }: Props) => {
   return (
     <section className='py-6'>
       <div className="flex items-center gap-6 mb-10">
-        <h3 className={`${courgetteFont.className} font-bold text-lg`}>{meaning.partOfSpeech}</h3>
+        <h3
+          className={`
+            ${courgetteFont.className}
+            font-bold text-lg
+            dark:text-zinc-100
+          `}
+        >
+          {meaning.partOfSpeech}
+        </h3>
         <HorizontalSeparator />
       </div>
       <section className="grid gap-5">
