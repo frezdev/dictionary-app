@@ -7,7 +7,6 @@ import { useAppDispatch } from "@/redux/hooks"
 import { setWord } from "@/redux/features/word/wordSlice"
 import { historial } from "@/services/historial"
 import { toast } from "sonner"
-import { randomUUID } from 'crypto'
 
 export const SearchForm = () => {
   const dispatch = useAppDispatch()
@@ -19,6 +18,14 @@ export const SearchForm = () => {
         const [error, data] = await WordServices.getByQuery(formValue.search.trim())
         if (data) dispatch(setWord(data))
         if (error) throw new Error(error.message)
+
+        // save in localStorage
+        historial.save({
+          word: formValue.search,
+          date: new Date(),
+          id: window.crypto.randomUUID()
+        })
+
       } catch (error) {
         if (error instanceof Error) {
           toast.error(error.message, {
@@ -27,11 +34,6 @@ export const SearchForm = () => {
         }
       }
 
-      historial.save({
-        word: formValue.search,
-        date: new Date(),
-        id: randomUUID()
-      })
 
     }
   })
